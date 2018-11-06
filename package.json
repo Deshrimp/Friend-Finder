@@ -1,5 +1,5 @@
 {
-  "name": "friend-finder",
+  "name": "Friend-Finder",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,10 +10,15 @@
     "type": "git",
     "url": "git+https://github.com/Deshrimp/Friend-Finder.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Deshrimp/Friend-Finder/issues"
   },
-  "homepage": "https://github.com/Deshrimp/Friend-Finder#readme"
+  "homepage": "https://github.com/Deshrimp/Friend-Finder#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "path": "^0.12.7"
+  }
 }
