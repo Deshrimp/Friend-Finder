@@ -5,16 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="/Styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <title>Document</title>
 </head>
 
 <body>
   <h1>Survey</h1>
-
-
-  <form>
+  <form id="form">
     <h1>Do you like dragons?</h1>
-    <div>
+    <div id="q1">
       <input type="radio" name="q1" value="1">
       <label>1</label>
 
@@ -30,7 +30,7 @@
       <input type="radio" name="q1" value="5">
       <label>5</label>
     </div>
-    <div>
+    <div id="q2">
       <h1>Do you link swings?</h1>
       <input type="radio" name="q2" value="1">
       <label>1</label>
@@ -167,7 +167,7 @@
       <label>5</label>
     </div>
     <div>
-      <h1>Do you like animals</h1>
+      <h1>Do you like animals?</h1>
       <input type="radio" name="q10" value="1">
       <label>1</label>
 
@@ -184,7 +184,51 @@
       <label>5</label>
     </div>
   </form>
+  <button onclick="submitInfo()">Submit</button>
+  <script>
+    function submitInfo() {
+      var answers = []
+      for (var i = 0; i < 11; i++) {
+        var question = document.getElementsByName('q' + i);
+        var answer;
+        for (var j = 0; j < question.length; j++) {
+          if (question[j].checked) {
 
+            answer = parseInt(question[j].value);
+
+            answers.push(answer);
+          }
+        }
+      }
+
+      compareAnswers(answers)
+    }
+    function compareAnswers(answers) {
+      fetch("/api/friends") // Call the fetch function passing the url of the API as a parameter
+        .then(function (data) {
+          data.json().then(data => {
+            var previous
+            //Go through all my users
+            for (var i = 0; i < data.length; i++) {
+              //Scores of each match
+              var MatchScores = data[i].scores
+              console.log("My Score: " + answers)
+              console.log(data[i].name + " : " + MatchScores)
+              //Map to get a new array with the difference of both arrays
+              var difference = answers.map(function (num, j) {
+                return num - MatchScores[j];
+              })
+              //This is the total diffeence
+              totalDif = difference.reduce((a, b) => a + b, 0);
+            }
+          })
+        })
+        .catch(function () {
+          // This is where you run code if the server returns any errors
+        });
+
+    }
+  </script>
 </body>
 
 </html>
