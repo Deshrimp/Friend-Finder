@@ -1,4 +1,4 @@
-var friends = [
+const friends = [
   {
     name: "Izuku Midoriya",
     photo:
@@ -30,4 +30,5 @@ var friends = [
     scores: [1, 5, 5, 3, 1, 5, 1, 1, 5, 5]
   }
 ]
-module.exports = friends
+
+export { friends }
